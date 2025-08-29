@@ -20,12 +20,25 @@ pipeline {
             steps {
                 script{
                     sh '''
-                    echo 'Build number'
+                    echo 'Build Docker Image'
                     echo $IMAGE_TAG
+                    docker build -t tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER} .
                     ls -ltr
                     '''
                 }
             }
         }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: "5517d3b5-95fe-4a2e-b64a-44eec57dbe03", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh "docker push tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}"
+
+                    }
+                }
+            }
+        }
+
     }
 }
