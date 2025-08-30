@@ -35,11 +35,9 @@ pipeline {
         stage('Push the artifacts'){
            steps{
                 script{
-                    sh '''
-                    echo 'Push to Docker repo'
-                    docker push tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}
-                    '''
-                    
+                    withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+                        bat "docker push tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}"
+                    }
                 }
             }
         }
