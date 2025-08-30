@@ -39,10 +39,10 @@ pipeline {
                 branch: 'main'
                 script {
                     
-                    sh ls -ltr
-                    sh cat deploy.yaml
+                    sh 'ls -ltr'
+                    sh 'cat deploy.yaml'
                     sh 'sed -i "s/$PREV_TAG/$BUILD_NUMBER/g" deploy.yaml'
-                    sh cat deploy.yaml
+                    sh 'cat deploy.yaml'
                     sh '''
                     git add deploy.yaml
                     git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
