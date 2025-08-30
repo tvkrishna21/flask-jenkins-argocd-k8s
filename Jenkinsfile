@@ -41,7 +41,7 @@ pipeline {
                     
                     sh 'ls -ltr'
                     sh 'cat deploy.yaml'
-                    sh 'sed "s/$PREV_TAG/$BUILD_NUMBER/g" deploy.yaml'
+                    sh 'sed -i "s/22/$BUILD_NUMBER/g" deploy.yaml'
                     sh 'cat deploy.yaml'
                     sh '''
                     git add deploy.yaml
