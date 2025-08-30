@@ -37,7 +37,11 @@ pipeline {
                 git credentialsId: '0819c8c8-4583-4950-bfa5-a23ae01ff226', 
                 url: 'https://github.com/tvkrishna21/cicd-k8s-manifests-repo',
                 branch: 'main'
-                ls -ltr                    
+                script {
+                    sh '''
+                    ls -ltr                    
+                    '''
+                }
             }
         }
     }
