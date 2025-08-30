@@ -32,23 +32,12 @@ pipeline {
             }
         }
 
-        stage('Update Manifests'){
-            steps {
-                git credentialsId: '0819c8c8-4583-4950-bfa5-a23ae01ff226', 
-                url: 'https://github.com/tvkrishna21/cicd-k8s-manifests-repo',
-                branch: 'main'
-                script {
-                    
-                    sh 'ls -ltr'
-                    sh 'cat deploy.yaml'
-                    sh 'sed -i "s/22/$BUILD_NUMBER/g" deploy.yaml'
-                    sh 'cat deploy.yaml'
-                    sh '''
-                    git add deploy.yaml
-                    git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-                    git remote -v
-                    git push https://github.com/tvkrishna21/cicd-k8s-manifests-repo.git HEAD:main
-                    '''
+        stage('Push the artifacts'){
+           steps{
+                script{
+                    docker.withRegistry('https://registry.docker.io', dockerhub) {
+                        docker.image(tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}).push()
+
                 }
             }
         }
