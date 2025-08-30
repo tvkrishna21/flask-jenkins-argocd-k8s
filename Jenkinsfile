@@ -26,6 +26,7 @@ pipeline {
                     echo $PREV_TAG
                     docker build -t tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER} .
                     ls -ltr
+                    docker images
                     '''
                 }
             }
