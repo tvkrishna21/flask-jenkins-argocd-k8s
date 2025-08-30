@@ -38,16 +38,16 @@ pipeline {
                 url: 'https://github.com/tvkrishna21/cicd-k8s-manifests-repo',
                 branch: 'main'
                 script {
-                    sh '''
-                    ls -ltr
-                    cat deploy.yaml
-                    'sed -i "s/$PREV_TAG/$BUILD_NUMBER/g" deploy.yaml'
-                    cat deploy.yaml
+                    
+                    sh ls -ltr
+                    sh cat deploy.yaml
+                    sh 'sed -i "s/$PREV_TAG/$BUILD_NUMBER/g" deploy.yaml'
+                    sh cat deploy.yaml
                     git add deploy.yaml
                     git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                     git remote -v
                     git push https://github.com/tvkrishna21/cicd-k8s-manifests-repo.git HEAD:main
-                    '''
+                    
                 }
             }
         }
