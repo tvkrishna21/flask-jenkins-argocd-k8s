@@ -36,7 +36,7 @@ pipeline {
            steps{
                 script{
                     withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-                        bat "docker push tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}"
+                        sh 'docker push tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}'
                     }
                 }
             }
