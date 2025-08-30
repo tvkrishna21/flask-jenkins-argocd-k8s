@@ -36,7 +36,7 @@ pipeline {
            steps{
                 script{
                     docker.withRegistry('https://registry.docker.io', dockerhub) {
-                        docker.image(tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}).push()
+                        docker.image('tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}').push()
 
                 }
             }
