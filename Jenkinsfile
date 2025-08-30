@@ -35,10 +35,11 @@ pipeline {
         stage('Push the artifacts'){
            steps{
                 script{
-                    withCredentials([string(credentialsId: ‘dockerhub’, variable: ‘dockerhubpwd’)]) {
-                        sh 'docker login -u tvkrishna21 -p ${dockerhubpwd}'
-                        sh 'docker push tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}'
-                    }
+                    sh '''
+                    echo 'Push to Docker repo'
+                    docker push tvkrishna21/flask-jenkins-argocd-k8s:${BUILD_NUMBER}
+                    '''
+                    
                 }
             }
         }
